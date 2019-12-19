@@ -259,8 +259,7 @@ func decodeMimeSentence(s string) string {
 	ss := strings.Split(s, " ")
 
 	for _, word := range ss {
-		dec := new(mime.WordDecoder)
-		w, err := dec.Decode(word)
+		w, err := wordDecoder.Decode(word)
 		if err != nil {
 			if len(result) == 0 {
 				w = word
@@ -354,7 +353,7 @@ func (hp headerParser) parseAddress(s string) (ma *mail.Address) {
 	}
 
 	if strings.Trim(s, " \n") != "" {
-		ma, hp.err = mail.ParseAddress(s)
+		ma, hp.err = AddressParser.Parse(s)
 
 		return ma
 	}
@@ -368,7 +367,7 @@ func (hp headerParser) parseAddressList(s string) (ma []*mail.Address) {
 	}
 
 	if strings.Trim(s, " \n") != "" {
-		ma, hp.err = mail.ParseAddressList(s)
+		ma, hp.err = AddressParser.ParseList(s)
 		return
 	}
 
