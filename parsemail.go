@@ -354,7 +354,7 @@ func (hp headerParser) parseAddress(s string) (ma *mail.Address) {
 	}
 
 	if strings.Trim(s, " \n") != "" {
-		ma, hp.err = mail.ParseAddress(s)
+		ma, hp.err = AddressParser.Parse(s)
 
 		return ma
 	}
@@ -368,7 +368,7 @@ func (hp headerParser) parseAddressList(s string) (ma []*mail.Address) {
 	}
 
 	if strings.Trim(s, " \n") != "" {
-		ma, hp.err = mail.ParseAddressList(s)
+		ma, hp.err = AddressParser.ParseList(s)
 		return
 	}
 
